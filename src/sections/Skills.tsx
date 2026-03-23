@@ -10,37 +10,43 @@ const skillCategories = [
     name: 'Blockchain',
     skills: ['Solidity', 'Hardhat', 'Remix IDE', 'MetaMask', 'Web3.js', 'Ethers.js', 'EVM'],
     color: '#00d9ff',
-    icon: '⛓️'
+    icon: '⛓️',
+    back: 'Building decentralized, trustless applications on the EVM — from token contracts to full DeFi protocol design.'
   },
   {
     name: 'AI & Data',
     skills: ['Python', 'OpenAI API', 'Streamlit', 'Pandas', 'NumPy', 'Prompt Engineering'],
     color: '#7b2cbf',
-    icon: '🤖'
+    icon: '🤖',
+    back: 'Engineering AI pipelines with LLMs, automation flows, and data analysis tools for real-world products.'
   },
   {
     name: 'Languages',
     skills: ['Python', 'JavaScript ES6+', 'Solidity', 'C++', 'Java'],
     color: '#ff2a6d',
-    icon: '💻'
+    icon: '💻',
+    back: 'Fluent in 5+ languages. DSA problem-solver with 323 LeetCode solutions including 39 Hards.'
   },
   {
     name: 'Backend',
     skills: ['Node.js', 'Express.js', 'REST API', 'MVC', 'Jest'],
     color: '#00d9ff',
-    icon: '⚙️'
+    icon: '⚙️',
+    back: 'REST API design, testing-first back-end development with Node.js and MVC architecture patterns.'
   },
   {
     name: 'Frontend',
     skills: ['React.js', 'HTML5', 'CSS3', 'Responsive Design', 'Tailwind CSS'],
     color: '#ff2a6d',
-    icon: '🎨'
+    icon: '🎨',
+    back: 'Building responsive, animated interfaces with React, GSAP, and Framer Motion — like this very portfolio.'
   },
   {
     name: 'Tools',
     skills: ['Git', 'GitHub', 'Vercel', 'VS Code', 'Linux CLI'],
     color: '#ffffff',
-    icon: '🛠️'
+    icon: '🛠️',
+    back: 'Full DevOps workflow: version control, CI-friendly deployments, and efficient CLI-driven development.'
   }
 ]
 
@@ -82,29 +88,12 @@ const proficiencyGroups = [
 
 export default function Skills() {
   const sectionRef = useRef<HTMLElement>(null)
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([])
   const barsRef = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
     const section = sectionRef.current
     if (!section) return
-
     const ctx = gsap.context(() => {
-      // Animate category cards with stagger
-      cardsRef.current.forEach((card, index) => {
-        if (!card) return
-        gsap.fromTo(
-          card,
-          { x: index % 2 === 0 ? -100 : 100, opacity: 0, rotateY: index % 2 === 0 ? -15 : 15 },
-          {
-            x: 0, opacity: 1, rotateY: 0,
-            duration: 0.8, ease: 'power3.out',
-            scrollTrigger: { trigger: card, start: 'top 85%', toggleActions: 'play none none none' }
-          }
-        )
-      })
-
-      // Animate proficiency bar sections
       barsRef.current.forEach((group) => {
         if (!group) return
         group.querySelectorAll<HTMLDivElement>('[data-bar-width]').forEach((bar) => {
@@ -122,7 +111,6 @@ export default function Skills() {
         })
       })
     }, section)
-
     return () => ctx.revert()
   }, [])
 
@@ -130,8 +118,24 @@ export default function Skills() {
     <section
       id="skills"
       ref={sectionRef}
-      className="relative min-h-screen w-full flex items-center py-24"
+      className="relative min-h-screen w-full flex items-center py-24 overflow-hidden"
     >
+      {/* BG accents */}
+      <div
+        className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle at 80% 20%, rgba(123,44,191,0.08), transparent 60%)',
+          filter: 'blur(80px)'
+        }}
+      />
+      <div
+        className="absolute bottom-0 left-0 w-[500px] h-[400px] pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle at 20% 80%, rgba(0,217,255,0.07), transparent 60%)',
+          filter: 'blur(80px)'
+        }}
+      />
+
       <div className="w-full px-6 lg:px-12 max-w-7xl mx-auto">
         {/* Section Title */}
         <motion.div
@@ -141,49 +145,85 @@ export default function Skills() {
           transition={{ duration: 0.6 }}
           className="mb-16 text-center"
         >
-          <h2 className="text-sm font-medium text-cyan-400 tracking-widest uppercase mb-4 font-['Space_Grotesk']">
-            Skills
-          </h2>
-          <h3 className="text-4xl md:text-5xl lg:text-6xl font-['Space_Grotesk'] font-bold">
-            Tech <span className="gradient-text">Stack</span>
-          </h3>
-          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
-            Technologies I work with to build scalable, secure, and innovative solutions
+          <p className="text-xs font-['Space_Mono'] text-cyan-400 tracking-[0.3em] uppercase mb-3">
+            // 03. WHAT I USE
           </p>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-['Space_Grotesk'] font-extrabold">
+            Tech <span className="gradient-text">Stack</span>
+          </h2>
+          <p className="text-gray-500 mt-4 max-w-2xl mx-auto font-['Space_Mono'] text-sm">
+            Hover the cards to flip &amp; see the story behind each stack.
+          </p>
+          <div className="mt-6 w-24 h-[2px] mx-auto bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500" />
         </motion.div>
 
-        {/* Skills Badge Grid */}
+        {/* 3D Flip Card Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
           {skillCategories.map((category, index) => (
-            <div
+            <motion.div
               key={category.name}
-              ref={el => { cardsRef.current[index] = el }}
-              className="glass-card p-6 md:p-8 rounded-2xl hoverable"
-              style={{ perspective: '1000px', borderLeft: `4px solid ${category.color}` }}
+              initial={{ opacity: 0, y: 50, rotateY: -10 }}
+              whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="flip-card h-52"
+              style={{ minHeight: '210px' }}
             >
-              <div className="flex items-center gap-4 mb-6">
-                <span className="text-3xl">{category.icon}</span>
-                <h4 className="text-xl md:text-2xl font-['Space_Grotesk'] font-bold" style={{ color: category.color }}>
-                  {category.name}
-                </h4>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.span
-                    key={skill}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: skillIndex * 0.05 }}
-                    whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
-                    className="skill-badge"
-                    style={{ borderColor: `${category.color}40`, color: category.color }}
+              <div className="flip-card-inner rounded-2xl" style={{ height: '210px' }}>
+                {/* Front */}
+                <div
+                  className="flip-card-front glass-card rounded-2xl p-6 md:p-8 hoverable flex flex-col justify-between"
+                  style={{ borderLeft: `3px solid ${category.color}` }}
+                >
+                  <div className="flex items-center gap-4 mb-4">
+                    <span className="text-3xl">{category.icon}</span>
+                    <h4
+                      className="text-xl md:text-2xl font-['Space_Grotesk'] font-bold"
+                      style={{ color: category.color }}
+                    >
+                      {category.name}
+                    </h4>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {category.skills.map((skill, si) => (
+                      <span
+                        key={skill}
+                        className="skill-badge text-xs"
+                        style={{
+                          borderColor: `${category.color}40`,
+                          color: category.color,
+                          animationDelay: `${si * 0.1}s`
+                        }}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Back */}
+                <div
+                  className="flip-card-back rounded-2xl flex flex-col items-center justify-center gap-4 p-6 text-center"
+                  style={{
+                    background: `linear-gradient(135deg, ${category.color}18, rgba(5,8,16,0.95))`,
+                    border: `1px solid ${category.color}50`,
+                    boxShadow: `0 0 40px ${category.color}20`
+                  }}
+                >
+                  <span className="text-5xl">{category.icon}</span>
+                  <p
+                    className="text-sm leading-relaxed font-['Space_Mono']"
+                    style={{ color: category.color === '#ffffff' ? '#d1d5db' : category.color }}
                   >
-                    {skill}
-                  </motion.span>
-                ))}
+                    {category.back}
+                  </p>
+                  <div
+                    className="w-8 h-[2px] rounded-full"
+                    style={{ background: category.color }}
+                  />
+                </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
@@ -208,8 +248,8 @@ export default function Skills() {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: gi * 0.1 }}
-              className="glass-card p-6 rounded-2xl"
+              transition={{ duration: 0.5, delay: gi * 0.12 }}
+              className="glass-card p-6 rounded-2xl neon-border"
               style={{ borderTop: `2px solid ${group.color}` }}
             >
               <h4
@@ -218,21 +258,26 @@ export default function Skills() {
               >
                 {group.label}
               </h4>
-              <div className="space-y-4">
+              <div className="space-y-5">
                 {group.items.map((item) => (
                   <div key={item.name}>
-                    <div className="flex justify-between items-center mb-1">
+                    <div className="flex justify-between items-center mb-2">
                       <span className="text-xs text-gray-400 font-['Space_Mono']">{item.name}</span>
-                      <span className="text-xs font-['Space_Mono']" style={{ color: group.color }}>{item.level}%</span>
+                      <span className="text-xs font-['Space_Mono'] font-bold" style={{ color: group.color }}>
+                        {item.level}%
+                      </span>
                     </div>
-                    <div className="w-full h-px bg-white/10 relative overflow-hidden rounded-full">
+                    {/* Bar track */}
+                    <div className="w-full h-[3px] bg-white/5 relative overflow-hidden rounded-full">
                       <div
                         data-bar-width={item.level}
                         style={{
                           width: '0%',
-                          height: '1px',
+                          height: '3px',
                           background: `linear-gradient(to right, ${group.color}, #7b2cbf)`,
-                          position: 'absolute', top: 0, left: 0
+                          position: 'absolute', top: 0, left: 0,
+                          boxShadow: `0 0 8px ${group.color}`,
+                          borderRadius: '9999px'
                         }}
                       />
                     </div>
