@@ -166,7 +166,7 @@ export default function ExplosionHero() {
         intensity = st * 2
       }
 
-      parts.forEach((p, i) => {
+      parts.forEach((p, _i) => {
         const targetPos = p.originalPos.clone().add(p.velocity.clone().multiplyScalar(explosionFactor * 0.2))
         p.mesh.position.lerp(targetPos, 0.1)
         p.mesh.rotateOnAxis(p.axis, 0.05 * explosionFactor)

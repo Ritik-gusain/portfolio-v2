@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import gsap from 'gsap'
 
 // Counter Animation Hook
 function useCountUp(target: number, duration = 2000, startOnView = true) {
@@ -182,7 +181,7 @@ export default function LeetCode() {
                                   initial={{ width: 0 }}
                                   whileInView={{ width: `${(item.count / 50) * 100}%` }}
                                   viewport={{ once: true }}
-                                  transition={{ duration: 1, ease: 'power4.out' }}
+                                  transition={{ duration: 1, ease: 'easeOut' }}
                                   className="h-full"
                                   style={{ background: item.color }}
                                 />
@@ -192,7 +191,7 @@ export default function LeetCode() {
                       </div>
                    </div>
 
-                   {/* Core */}
+                   {/* Core */
                    <div className="space-y-6">
                       <p className="text-[10px] font-black font-['Space_Mono'] text-white/40 tracking-[0.5em] uppercase">// CORE_PROTOCOLS</p>
                       <div className="grid gap-6">
@@ -207,7 +206,7 @@ export default function LeetCode() {
                                   initial={{ width: 0 }}
                                   whileInView={{ width: `${(item.count / 100) * 100}%` }}
                                   viewport={{ once: true }}
-                                  transition={{ duration: 1, ease: 'power4.out' }}
+                                  transition={{ duration: 1, ease: 'easeOut' }}
                                   className="h-full"
                                   style={{ background: item.color }}
                                 />

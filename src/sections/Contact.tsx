@@ -33,7 +33,7 @@ export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [isLoading, setIsLoading] = useState(false)
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null)
-  const [focused, setFocused] = useState<string | null>(null)
+  const [_focused, setFocused] = useState<string | null>(null)
 
   const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 
