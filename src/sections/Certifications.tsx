@@ -5,35 +5,35 @@ import { FiAward } from 'react-icons/fi'
 const certifications = [
   {
     id: 1,
-    title: 'Blockchain Basics',
-    issuer: 'Cyfrin Updraft',
+    title: 'BLOCKCHAIN_BASICS',
+    issuer: 'CYFRIN_UPDRAFT',
     icon: '⛓️',
-    details: ['Verified', 'EVM', 'Smart Contracts', 'DeFi', 'Wallets', 'NFTs'],
-    color: '#00d9ff'
+    details: ['VERIFIED', 'EVM', 'SMART_CONTRACTS', 'DEFI', 'WALLETS', 'NFTS'],
+    color: '#f0ff00'
   },
   {
     id: 2,
-    title: 'Generative AI Mastermind',
-    issuer: 'Outskill · May 2025',
+    title: 'GEN_AI_MASTERMIND',
+    issuer: 'OUTSKILL · MAY_2025',
     icon: '🤖',
-    details: ['LLM Architecture', 'Prompt Engineering', 'AI API Integration'],
-    color: '#7b2cbf'
+    details: ['LLM_ARCH', 'PROMPT_ENG', 'AI_API_BREACH'],
+    color: '#ff6b00'
   },
   {
     id: 3,
-    title: 'Front-End Development',
-    issuer: 'DUCAT Institute Delhi · Jul–Aug 2025',
+    title: 'FRONT-END_DEV',
+    issuer: 'DUCAT_INST_DELHI · JUL–AUG_2025',
     icon: '💻',
-    details: ['HTML5', 'CSS3', 'JavaScript ES6+', 'Responsive Design'],
+    details: ['HTML5', 'CSS3', 'JS_ES6+', 'RESPONSIVE_DESIGN'],
     color: '#ff2a6d'
   },
   {
     id: 4,
-    title: 'Technology Job Simulation',
-    issuer: 'Forage · 2024',
+    title: 'TECH_JOB_SIM',
+    issuer: 'FORAGE · 2024',
     icon: '🏢',
-    details: ['Coding', 'Dev Workflows', 'Professional Delivery'],
-    color: '#00d9ff'
+    details: ['CODING', 'DEV_WORKFLOWS', 'PROFESSIONAL_DELIVERY'],
+    color: '#f0ff00'
   }
 ]
 
@@ -43,100 +43,92 @@ export default function Certifications() {
   return (
     <section
       id="certifications"
-      className="relative min-h-screen w-full flex items-center py-24"
+      className="relative min-h-screen w-full flex items-center py-24 bg-[#050810] overflow-hidden"
     >
-      <div className="w-full px-6 lg:px-12 max-w-7xl mx-auto">
-        {/* Section Title */}
+      {/* Background sweep */}
+      <div className="absolute inset-0 pointer-events-none opacity-5 bg-gradient-to-r from-[#ff6b00] to-transparent" />
+
+      <div className="w-full px-6 lg:px-12 max-w-7xl mx-auto relative z-10">
+        {/* Section Title - Busted style */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
           className="mb-16 text-center"
         >
-          <h2 className="text-sm font-medium text-cyan-400 tracking-widest uppercase mb-4 font-['Space_Grotesk']">
-            Certifications
+          <p className="text-xs font-['Space_Mono'] text-[#f0ff00] tracking-[0.5em] uppercase mb-3 font-black">
+            // STATUS: VERIFIED_BREACHES
+          </p>
+          <h2 className="text-5xl md:text-8xl font-['Space_Grotesk'] font-black glitch-text uppercase italic tracking-tighter" data-text="CREDENTIALS">
+            VERIFIED_<span className="text-[#f0ff00]">BREACHES</span>
           </h2>
-          <h3 className="text-4xl md:text-5xl lg:text-6xl font-['Space_Grotesk'] font-bold">
-            Verified <span className="gradient-text">Credentials</span>
-          </h3>
+          <div className="mt-6 w-48 h-2 mx-auto bg-[#f0ff00] skew-x-[-20deg]" />
         </motion.div>
 
-        {/* Horizontal Scroll Container */}
+        {/* Horizontal Scroll Container - Busted cards */}
         <div
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide"
+          className="flex gap-8 overflow-x-auto pb-12 snap-x snap-mandatory scrollbar-hide"
         >
           {certifications.map((cert, index) => (
             <motion.div
               key={cert.id}
-              initial={{ opacity: 0, y: 40, scale: 0.9 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              initial={{ opacity: 0, x: 50, rotate: index % 2 === 0 ? 2 : -2 }}
+              whileInView={{ opacity: 1, x: 0, rotate: 0 }}
               viewport={{ once: true }}
-              transition={{ 
-                duration: 0.5, 
-                delay: index * 0.1,
-                type: 'spring',
-                stiffness: 100
-              }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
               whileHover={{ 
-                y: -10,
+                scale: 1.05,
+                rotate: index % 2 === 0 ? -2 : 2,
                 transition: { duration: 0.2 }
               }}
-              className="glass-card p-6 md:p-8 rounded-2xl flex-shrink-0 w-[300px] md:w-[350px] snap-start hoverable"
+              className="bg-white/5 border-l-8 p-8 md:p-10 skew-x-[-4deg] flex-shrink-0 w-[300px] md:w-[400px] snap-start group relative overflow-hidden"
               style={{
-                borderTop: `4px solid ${cert.color}`
+                borderColor: cert.color
               }}
             >
               {/* Icon & Title */}
-              <div className="flex items-start gap-4 mb-4">
-                <span className="text-4xl">{cert.icon}</span>
+              <div className="flex items-start gap-6 mb-8 skew-x-[4deg]">
+                <span className="text-5xl">{cert.icon}</span>
                 <div>
-                  <h4 className="text-lg md:text-xl font-['Space_Grotesk'] font-bold leading-tight">
+                  <h4 className="text-xl md:text-2xl font-['Space_Grotesk'] font-black italic tracking-tighter uppercase leading-tight" style={{ color: cert.color }}>
                     {cert.title}
                   </h4>
-                  <p className="text-gray-400 text-sm mt-1">{cert.issuer}</p>
+                  <p className="text-white/40 text-[10px] font-black font-['Space_Mono'] uppercase tracking-widest mt-1">{cert.issuer}</p>
                 </div>
               </div>
 
-              {/* Details */}
-              <div className="flex flex-wrap gap-2">
+              {/* Details - Skewed tags */}
+              <div className="flex flex-wrap gap-2 skew-x-[4deg]">
                 {cert.details.map((detail) => (
                   <span
                     key={detail}
-                    className="px-3 py-1 text-xs rounded-full glass"
-                    style={{ color: cert.color }}
+                    className="px-3 py-1 text-[10px] font-black font-['Space_Mono'] border-2 uppercase tracking-tighter"
+                    style={{ color: cert.color, borderColor: `${cert.color}33` }}
                   >
                     {detail}
                   </span>
                 ))}
               </div>
 
-              {/* Award Icon */}
+              {/* Award Icon - Busted version */}
               <motion.div
-                className="mt-4 flex justify-end"
-                whileHover={{ scale: 1.2, rotate: 10 }}
+                className="mt-8 flex justify-end skew-x-[4deg]"
+                whileHover={{ scale: 1.2, rotate: 20 }}
               >
-                <FiAward 
-                  className="transition-colors cursor-pointer" 
-                  style={{ color: cert.color }}
-                  size={20}
-                />
+                <div 
+                   className="w-10 h-10 flex items-center justify-center border-2" 
+                   style={{ borderColor: cert.color, color: cert.color }}
+                >
+                   <FiAward size={20} />
+                </div>
               </motion.div>
+              
+              {/* Hover glow */}
+              <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity" />
             </motion.div>
           ))}
         </div>
-
-        {/* Scroll Hint */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="text-center text-gray-500 text-sm mt-4 md:hidden"
-        >
-          ← Swipe to see more →
-        </motion.p>
       </div>
     </section>
   )

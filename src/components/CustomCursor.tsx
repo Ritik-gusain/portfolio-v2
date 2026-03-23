@@ -86,32 +86,39 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Main cursor circle */}
+      {/* Busted cursor - Square design with glitch */}
       <div
         ref={cursorRef}
-        className={`custom-cursor fixed pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 transition-all duration-150 ${
+        className={`custom-cursor fixed pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 transition-all duration-75 ${
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
         style={{
-          width: isHovering ? '50px' : '24px',
-          height: isHovering ? '50px' : '24px',
-          border: '2px solid #00d9ff',
-          borderRadius: '50%',
-          mixBlendMode: 'difference',
+          width: isHovering ? '60px' : '30px',
+          height: isHovering ? '60px' : '30px',
+          border: '3px solid #f0ff00',
+          borderRadius: '0', // Square
+          transform: `translate(-50%, -50%) rotate(${isHovering ? '45deg' : '0deg'})`,
+          boxShadow: '0 0 20px #f0ff0066',
+          mixBlendMode: 'normal',
         }}
-      />
-      {/* Center dot */}
+      >
+        {/* Inner crosshair lines */}
+        <div className="absolute top-1/2 left-0 w-full h-[2px] bg-[#f0ff00] -translate-y-1/2 opacity-30" />
+        <div className="absolute left-1/2 top-0 h-full w-[2px] bg-[#f0ff00] -translate-x-1/2 opacity-30" />
+      </div>
+      
+      {/* Center dot - more intense */}
       <div
         ref={cursorDotRef}
         className={`custom-cursor fixed pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 ${
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
         style={{
-          width: '6px',
-          height: '6px',
-          backgroundColor: '#00d9ff',
-          borderRadius: '50%',
-          mixBlendMode: 'difference',
+          width: '8px',
+          height: '8px',
+          backgroundColor: '#ff6b00',
+          borderRadius: '0',
+          boxShadow: '0 0 15px #ff6b00',
         }}
       />
     </>

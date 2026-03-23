@@ -7,53 +7,53 @@ gsap.registerPlugin(ScrollTrigger)
 
 const skillCategories = [
   {
-    name: 'Blockchain',
+    name: 'BLOCKCHAIN_VOID',
     skills: ['Solidity', 'Hardhat', 'Remix IDE', 'MetaMask', 'Web3.js', 'Ethers.js', 'EVM'],
-    color: '#00d9ff',
+    color: '#f0ff00',
     icon: '⛓️',
-    back: 'Building decentralized, trustless applications on the EVM — from token contracts to full DeFi protocol design.'
+    back: 'ENGINEERING TRUSTLESS ANARCHY ON THE EVM. FROM DEFI EXPLOITS TO SECURE PROTOCOL DESIGN.'
   },
   {
-    name: 'AI & Data',
+    name: 'AI_CHAOS',
     skills: ['Python', 'OpenAI API', 'Streamlit', 'Pandas', 'NumPy', 'Prompt Engineering'],
-    color: '#7b2cbf',
+    color: '#ff6b00',
     icon: '🤖',
-    back: 'Engineering AI pipelines with LLMs, automation flows, and data analysis tools for real-world products.'
+    back: 'BENDING LLMS TO MY WILL. AUTOMATING THE FUTURE WITH AGGRESSIVE PIPELINES.'
   },
   {
-    name: 'Languages',
+    name: 'CORE_LANGS',
     skills: ['Python', 'JavaScript ES6+', 'Solidity', 'C++', 'Java'],
     color: '#ff2a6d',
     icon: '💻',
-    back: 'Fluent in 5+ languages. DSA problem-solver with 323 LeetCode solutions including 39 Hards.'
+    back: 'FLUENT IN 5+ DIALECTS OF POWER. 323 LEETCODE CONQUESTS AND COUNTING.'
   },
   {
-    name: 'Backend',
+    name: 'BACKEND_SKELETON',
     skills: ['Node.js', 'Express.js', 'REST API', 'MVC', 'Jest'],
-    color: '#00d9ff',
+    color: '#f0ff00',
     icon: '⚙️',
-    back: 'REST API design, testing-first back-end development with Node.js and MVC architecture patterns.'
+    back: 'FORGING THE BONE-STRUCTURE OF APPLICATIONS. TEST-DRIVEN DESTRUCTION.'
   },
   {
-    name: 'Frontend',
+    name: 'FRONTEND_GLITCH',
     skills: ['React.js', 'HTML5', 'CSS3', 'Responsive Design', 'Tailwind CSS'],
     color: '#ff2a6d',
     icon: '🎨',
-    back: 'Building responsive, animated interfaces with React, GSAP, and Framer Motion — like this very portfolio.'
+    back: 'CRAFTING VISUAL EXPLOSIONS. REACT, GSAP, AND CHAOTIC UI DESIGN.'
   },
   {
-    name: 'Tools',
+    name: 'GEAR_MODULES',
     skills: ['Git', 'GitHub', 'Vercel', 'VS Code', 'Linux CLI'],
     color: '#ffffff',
     icon: '🛠️',
-    back: 'Full DevOps workflow: version control, CI-friendly deployments, and efficient CLI-driven development.'
+    back: 'FULL DEVOPS DOMINATION. CI/CD WARFARE AND CLI MASTERY.'
   }
 ]
 
 const proficiencyGroups = [
   {
-    label: 'Blockchain',
-    color: '#00d9ff',
+    label: 'BLOCKCHAIN_STRENGTH',
+    color: '#f0ff00',
     items: [
       { name: 'Solidity / EVM', level: 90 },
       { name: 'Hardhat / Foundry', level: 80 },
@@ -63,8 +63,8 @@ const proficiencyGroups = [
     ]
   },
   {
-    label: 'AI Engineering',
-    color: '#7b2cbf',
+    label: 'AI_DOMINATION',
+    color: '#ff6b00',
     items: [
       { name: 'Python / ML Pipelines', level: 82 },
       { name: 'LLM Engineering', level: 78 },
@@ -74,7 +74,7 @@ const proficiencyGroups = [
     ]
   },
   {
-    label: 'Systems & Dev',
+    label: 'SYSTEM_HARDENING',
     color: '#ff2a6d',
     items: [
       { name: 'ESP32 / IoT / LiFi', level: 78 },
@@ -100,11 +100,12 @@ export default function Skills() {
           const width = bar.getAttribute('data-bar-width')
           gsap.fromTo(
             bar,
-            { width: '0%' },
+            { width: '0%', backgroundColor: '#ffffff' },
             {
               width: width + '%',
-              duration: 1.6,
-              ease: 'power2.out',
+              backgroundColor: 'inherit',
+              duration: 1,
+              ease: 'power4.inOut',
               scrollTrigger: { trigger: group, start: 'top 80%', toggleActions: 'play none none none' }
             }
           )
@@ -118,82 +119,65 @@ export default function Skills() {
     <section
       id="skills"
       ref={sectionRef}
-      className="relative min-h-screen w-full flex items-center py-24 overflow-hidden"
+      className="relative min-h-screen w-full flex items-center py-24 overflow-hidden bg-[#050810]"
     >
       {/* BG accents */}
       <div
-        className="absolute top-0 right-0 w-[600px] h-[400px] pointer-events-none"
+        className="absolute bottom-0 right-0 w-[800px] h-[800px] pointer-events-none opacity-10"
         style={{
-          background: 'radial-gradient(circle at 80% 20%, rgba(123,44,191,0.08), transparent 60%)',
-          filter: 'blur(80px)'
-        }}
-      />
-      <div
-        className="absolute bottom-0 left-0 w-[500px] h-[400px] pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle at 20% 80%, rgba(0,217,255,0.07), transparent 60%)',
-          filter: 'blur(80px)'
+          background: 'radial-gradient(circle, #ff2a6d 0%, transparent 70%)',
+          filter: 'blur(120px)'
         }}
       />
 
-      <div className="w-full px-6 lg:px-12 max-w-7xl mx-auto">
+      <div className="w-full px-6 lg:px-12 max-w-7xl mx-auto relative z-10">
         {/* Section Title */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
           className="mb-16 text-center"
         >
-          <p className="text-xs font-['Space_Mono'] text-cyan-400 tracking-[0.3em] uppercase mb-3">
-            // 03. WHAT I USE
+          <p className="text-xs font-['Space_Mono'] text-[#f0ff00] tracking-[0.5em] uppercase mb-3 font-black">
+            // DATA: ARSENAL_LOADOUT
           </p>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-['Space_Grotesk'] font-extrabold">
-            Tech <span className="gradient-text">Stack</span>
+          <h2 className="text-4xl md:text-8xl font-['Space_Grotesk'] font-black glitch-text uppercase italic tracking-tighter" data-text="TECH_STACK">
+            TECH_<span className="text-[#f0ff00]">STACK</span>
           </h2>
-          <p className="text-gray-500 mt-4 max-w-2xl mx-auto font-['Space_Mono'] text-sm">
-            Hover the cards to flip &amp; see the story behind each stack.
-          </p>
-          <div className="mt-6 w-24 h-[2px] mx-auto bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500" />
+          <div className="mt-6 w-48 h-2 mx-auto bg-[#f0ff00] skew-x-[-20deg]" />
         </motion.div>
 
         {/* 3D Flip Card Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
           {skillCategories.map((category, index) => (
             <motion.div
               key={category.name}
-              initial={{ opacity: 0, y: 50, rotateY: -10 }}
-              whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="flip-card h-52"
-              style={{ minHeight: '210px' }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              className="flip-card h-64 group"
             >
-              <div className="flip-card-inner rounded-2xl" style={{ height: '210px' }}>
+              <div className="flip-card-inner rounded-none group-hover:rotate-y-180 transition-transform duration-700">
                 {/* Front */}
                 <div
-                  className="flip-card-front glass-card rounded-2xl p-6 md:p-8 hoverable flex flex-col justify-between"
-                  style={{ borderLeft: `3px solid ${category.color}` }}
+                  className="flip-card-front bg-white/5 border-4 border-white/10 p-8 flex flex-col justify-between skew-x-[-4deg]"
+                  style={{ borderLeft: `8px solid ${category.color}` }}
                 >
-                  <div className="flex items-center gap-4 mb-4">
-                    <span className="text-3xl">{category.icon}</span>
+                  <div className="flex items-center gap-4 mb-4 skew-x-[4deg]">
+                    <span className="text-4xl">{category.icon}</span>
                     <h4
-                      className="text-xl md:text-2xl font-['Space_Grotesk'] font-bold"
+                      className="text-xl font-black font-['Space_Grotesk'] italic tracking-tighter"
                       style={{ color: category.color }}
                     >
                       {category.name}
                     </h4>
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    {category.skills.map((skill, si) => (
+                  <div className="flex flex-wrap gap-2 skew-x-[4deg]">
+                    {category.skills.map((skill) => (
                       <span
                         key={skill}
-                        className="skill-badge text-xs"
-                        style={{
-                          borderColor: `${category.color}40`,
-                          color: category.color,
-                          animationDelay: `${si * 0.1}s`
-                        }}
+                        className="bg-white/10 text-white text-[10px] font-black font-['Space_Mono'] px-3 py-1 uppercase tracking-tighter"
                       >
                         {skill}
                       </span>
@@ -203,24 +187,14 @@ export default function Skills() {
 
                 {/* Back */}
                 <div
-                  className="flip-card-back rounded-2xl flex flex-col items-center justify-center gap-4 p-6 text-center"
-                  style={{
-                    background: `linear-gradient(135deg, ${category.color}18, rgba(5,8,16,0.95))`,
-                    border: `1px solid ${category.color}50`,
-                    boxShadow: `0 0 40px ${category.color}20`
-                  }}
+                  className="flip-card-back bg-white text-black flex flex-col items-center justify-center gap-4 p-8 text-center skew-x-[-4deg]"
+                  style={{ background: category.color }}
                 >
-                  <span className="text-5xl">{category.icon}</span>
-                  <p
-                    className="text-sm leading-relaxed font-['Space_Mono']"
-                    style={{ color: category.color === '#ffffff' ? '#d1d5db' : category.color }}
-                  >
-                    {category.back}
-                  </p>
-                  <div
-                    className="w-8 h-[2px] rounded-full"
-                    style={{ background: category.color }}
-                  />
+                  <div className="skew-x-[4deg]">
+                    <p className="text-sm font-black font-['Space_Mono'] uppercase leading-tight italic">
+                      {category.back}
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -228,58 +202,45 @@ export default function Skills() {
         </div>
 
         {/* Proficiency Bars */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-10 text-center"
-        >
-          <h3 className="text-2xl md:text-3xl font-['Space_Grotesk'] font-bold">
-            Proficiency <span className="gradient-text">Levels</span>
-          </h3>
-        </motion.div>
-
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-12">
           {proficiencyGroups.map((group, gi) => (
             <motion.div
               key={group.label}
               ref={el => { barsRef.current[gi] = el }}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: gi * 0.12 }}
-              className="glass-card p-6 rounded-2xl neon-border"
-              style={{ borderTop: `2px solid ${group.color}` }}
+              transition={{ duration: 0.4, delay: gi * 0.1 }}
+              className="relative p-8 bg-white/5 border-2 border-white/10"
             >
               <h4
-                className="font-['Space_Mono'] text-xs tracking-widest uppercase mb-6"
+                className="font-['Space_Mono'] text-sm font-black tracking-widest uppercase mb-8 italic"
                 style={{ color: group.color }}
               >
                 {group.label}
               </h4>
-              <div className="space-y-5">
+              <div className="space-y-8">
                 {group.items.map((item) => (
                   <div key={item.name}>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-xs text-gray-400 font-['Space_Mono']">{item.name}</span>
-                      <span className="text-xs font-['Space_Mono'] font-bold" style={{ color: group.color }}>
+                      <span className="text-[10px] text-white/60 font-black font-['Space_Mono'] uppercase tracking-widest">{item.name}</span>
+                      <span className="text-sm font-black font-['Space_Mono'] italic" style={{ color: group.color }}>
                         {item.level}%
                       </span>
                     </div>
                     {/* Bar track */}
-                    <div className="w-full h-[3px] bg-white/5 relative overflow-hidden rounded-full">
+                    <div className="w-full h-4 bg-white/5 relative overflow-hidden skew-x-[-20deg]">
                       <div
                         data-bar-width={item.level}
+                        className="absolute top-0 left-0 h-full"
                         style={{
                           width: '0%',
-                          height: '3px',
-                          background: `linear-gradient(to right, ${group.color}, #7b2cbf)`,
-                          position: 'absolute', top: 0, left: 0,
-                          boxShadow: `0 0 8px ${group.color}`,
-                          borderRadius: '9999px'
+                          background: group.color,
+                          boxShadow: `0 0 20px ${group.color}44`,
                         }}
                       />
+                      {/* Dashing overlay */}
+                      <div className="absolute inset-0 dashing-line opacity-30" />
                     </div>
                   </div>
                 ))}

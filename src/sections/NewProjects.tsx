@@ -8,79 +8,79 @@ gsap.registerPlugin(ScrollTrigger)
 const projects = [
   {
     id: 1,
-    title: 'Indentron',
-    subtitle: 'Smart Code Formatter',
+    title: 'INDENTRON_v2',
+    subtitle: 'CODE_FORMATTER_PROTOCOL',
     liveUrl: 'https://indentron.vercel.app',
     githubUrl: 'https://github.com/Ritik-gusain/indentron',
     stack: ['Node.js', 'Express.js', 'REST API', 'MVC', 'Jest', 'Vercel'],
-    description: 'Full-stack web app formatting 12+ languages with VS Code dark UI, 6+ REST endpoints, file upload, code sharing, analytics.',
-    color: '#00d9ff',
-    borderColor: 'border-cyan-400',
+    description: 'BENDING CODE TO MY WILL. FULL-STACK WEB APP FORMATTING 12+ LANGUAGES WITH VS CODE DARK UI.',
+    color: '#f0ff00',
+    borderColor: 'border-[#f0ff00]',
     glowClass: 'cyan-glow',
     icon: '⛓️'
   },
   {
     id: 2,
-    title: 'AI Chatbot',
-    subtitle: 'OpenAI Powered',
+    title: 'AI_CHAT_CHAOS',
+    subtitle: 'OPENAI_BREACH',
     liveUrl: null,
     githubUrl: 'https://github.com/Ritik-gusain/chatbot',
     stack: ['Python', 'OpenAI API', 'Streamlit', 'Prompt Engineering'],
-    description: 'Conversational AI chatbot with OpenAI API + Streamlit interface, applied prompt engineering for response quality control.',
-    color: '#7b2cbf',
-    borderColor: 'border-purple-500',
+    description: 'CONVERSATIONAL ANARCHY. OPENAI API + STREAMLIT INTERFACE WITH AGGRESSIVE PROMPT ENGINEERING.',
+    color: '#ff6b00',
+    borderColor: 'border-[#ff6b00]',
     glowClass: 'purple-glow',
     icon: '🤖'
   },
   {
     id: 3,
-    title: 'Portfolio Website',
-    subtitle: 'This Site',
+    title: 'VIBE_PORTFOLIO',
+    subtitle: 'CURRENT_INTERFACE',
     liveUrl: 'https://ritikg-portfolio.vercel.app',
     githubUrl: null,
     stack: ['React', 'Three.js', 'GSAP', 'Framer Motion', 'Supabase'],
-    description: 'This portfolio — 3D interactive site with cinematic Quantum Node hero, real-time visitor analytics, and full animation pipeline.',
+    description: 'THIS VERY EXPLOSION. 3D INTERACTIVE SITE WITH CINEMATIC BUSTED HERO AND ANALYTICS BREACH.',
     color: '#ff2a6d',
-    borderColor: 'border-pink-500',
+    borderColor: 'border-[#ff2a6d]',
     glowClass: 'red-glow',
     icon: '🌐'
   },
   {
     id: 4,
-    title: 'DisTof',
-    subtitle: 'IEEE-Grade IoT Project',
+    title: 'DISTOF_IOT',
+    subtitle: 'IEEE_SIGNAL_JAMMER',
     liveUrl: null,
     githubUrl: null,
     stack: ['IoT', 'ESP8266', 'VL53L0X', 'Flutter', 'WebSocket'],
-    description: 'IEEE final-year project. VL53L0X ToF sensor with Kalman filtering, dual-threshold outlier rejection, and a Flutter app over WebSocket.',
-    color: '#00d9ff',
-    borderColor: 'border-cyan-400',
+    description: 'IEEE FINAL-YEAR CONQUEST. VL53L0X TOF SENSOR WITH KALMAN FILTERING AND WEBSOCKET OVERLOAD.',
+    color: '#f0ff00',
+    borderColor: 'border-[#f0ff00]',
     glowClass: 'cyan-glow',
     icon: '📡'
   },
   {
     id: 5,
-    title: 'AI Content Engine',
-    subtitle: 'Fully Automated Pipeline',
+    title: 'CONTENT_ENGINE',
+    subtitle: 'AUTOMATED_X_WARFARE',
     liveUrl: null,
     githubUrl: null,
     stack: ['Make.com', 'Gemini 2.5', 'Pollinations.ai', 'Buffer', 'RSS'],
-    description: 'Automated X/Twitter content pipeline: Gemini 2.5 Flash + AI image gen + Buffer. RSS-triggered trend-hijack automation.',
-    color: '#7b2cbf',
-    borderColor: 'border-purple-500',
+    description: 'X/TWITTER CONTENT PIPELINE. GEMINI 2.5 FLASH + AI IMAGE GEN + BUFFER. RSS-TRIGGERED DOMINATION.',
+    color: '#ff6b00',
+    borderColor: 'border-[#ff6b00]',
     glowClass: 'purple-glow',
     icon: '⚡'
   },
   {
     id: 6,
-    title: 'LiFi Node',
-    subtitle: 'Optical Data Transmission',
+    title: 'LIFI_NODE_X',
+    subtitle: 'OPTICAL_SIGNAL_BREACH',
     liveUrl: null,
     githubUrl: null,
     stack: ['ESP32-C3', 'LiFi', 'C++', 'Hardware', 'Wireless'],
-    description: 'ESP32-C3 optical data transmission via modulated LED light. Hardware-level networking on the bleeding edge of wireless comms.',
+    description: 'ESP32-C3 OPTICAL DATA TRANSMISSION via MODULATED LED LIGHT. HARDWARE-LEVEL NETWORK WARFARE.',
     color: '#ff2a6d',
-    borderColor: 'border-pink-500',
+    borderColor: 'border-[#ff2a6d]',
     glowClass: 'red-glow',
     icon: '💡'
   }
@@ -94,7 +94,7 @@ const frameExtension = 'jpg'
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const offscreenFrames = useRef<OffscreenCanvas[]>([])
+  const [frames, setFrames] = useState<HTMLCanvasElement[]>([])
   const [isPreloading, setIsPreloading] = useState(true)
   const [preloadProgress, setPreloadProgress] = useState(0)
 
@@ -106,32 +106,45 @@ export default function Projects() {
   // Preload + pre-bake frames
   useEffect(() => {
     const loadImages = async () => {
-      const targetW = Math.min(window.innerWidth / 2, 720)
-      const targetH = Math.round(targetW * (9 / 16))
-
-      const frames: OffscreenCanvas[] = []
+      const targetSize = 600
+      const loadedFrames: HTMLCanvasElement[] = []
 
       for (let i = 1; i <= totalFrames; i++) {
         const img = new Image()
+        // Ensure path is correct relative to public folder
         img.src = `/frames/${framePrefix}${String(i).padStart(3, '0')}.${frameExtension}`
-        await new Promise<void>(resolve => { img.onload = () => resolve(); img.onerror = () => resolve() })
-
-        const oc = new OffscreenCanvas(targetW, targetH)
-        const octx = oc.getContext('2d')!
-        octx.drawImage(img, 0, 0, targetW, targetH)
-        frames.push(oc)
-
-        setPreloadProgress((i / totalFrames) * 100)
+        
+        await new Promise<void>(resolve => {
+          img.onload = () => {
+            const oc = document.createElement('canvas')
+            oc.width = targetSize
+            oc.height = targetSize
+            const octx = oc.getContext('2d')!
+            
+            const scale = Math.max(targetSize / img.width, targetSize / img.height)
+            const x = (targetSize / 2) - (img.width / 2) * scale
+            const y = (targetSize / 2) - (img.height / 2) * scale
+            octx.drawImage(img, x, y, img.width * scale, img.height * scale)
+            
+            loadedFrames.push(oc)
+            setPreloadProgress((i / totalFrames) * 100)
+            resolve()
+          }
+          img.onerror = () => {
+            console.error(`Failed to load frame ${i}`)
+            resolve() 
+          }
+        })
       }
 
-      offscreenFrames.current = frames
+      setFrames(loadedFrames)
 
       const canvas = canvasRef.current
-      if (canvas && frames.length > 0) {
-        canvas.width = targetW
-        canvas.height = targetH
+      if (canvas && loadedFrames.length > 0) {
+        canvas.width = targetSize
+        canvas.height = targetSize
         const ctx = canvas.getContext('2d')!
-        ctx.drawImage(frames[0], 0, 0)
+        ctx.drawImage(loadedFrames[0], 0, 0)
       }
 
       setIsPreloading(false)
@@ -141,14 +154,13 @@ export default function Projects() {
 
   // GSAP scroll-scrub for frame animation
   useEffect(() => {
-    if (isPreloading || offscreenFrames.current.length === 0) return
+    if (isPreloading || frames.length === 0) return
 
     const section = sectionRef.current
     const canvas = canvasRef.current
     if (!section || !canvas) return
 
     const ctx = canvas.getContext('2d')!
-    const frames = offscreenFrames.current
     let lastFrameIndex = -1
 
     const render = (index: number) => {
@@ -175,7 +187,6 @@ export default function Projects() {
       }
     })
 
-    // Sync card sliding with scroll progress
     ScrollTrigger.create({
       trigger: section,
       start: 'top top',
@@ -190,7 +201,7 @@ export default function Projects() {
       tl.kill()
       ScrollTrigger.getAll().forEach(t => t.kill())
     }
-  }, [isPreloading])
+  }, [isPreloading, frames])
 
   // Auto-slide when not driven by scroll
   useEffect(() => {
@@ -215,156 +226,146 @@ export default function Projects() {
 
   return (
     <section id="projects" ref={sectionRef} className="relative h-screen w-full overflow-hidden bg-[#050810]">
-      {/* Loading overlay */}
+      {/* Loading overlay - Busted style */}
       {isPreloading && (
         <div className="absolute inset-0 flex items-center justify-center bg-[#050810] z-20">
           <div className="text-center">
-            <div className="text-4xl font-bold gradient-text mb-4 font-['Space_Grotesk']">
-              Loading Projects
+            <div className="text-6xl font-black text-[#f0ff00] mb-8 font-['Space_Grotesk'] italic glitch-text" data-text="BREACHING_DATA">
+              BREACHING_DATA
             </div>
-            <div className="w-64 h-2 bg-gray-800 rounded-full overflow-hidden">
+            <div className="w-96 h-4 bg-white/5 border-2 border-white/10 skew-x-[-20deg] overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-cyan-400 to-pink-500 transition-all duration-300"
+                className="h-full bg-[#f0ff00] transition-all duration-300"
                 style={{ width: `${preloadProgress}%` }}
               />
             </div>
-            <p className="text-gray-400 mt-2">{Math.round(preloadProgress)}%</p>
+            <p className="text-[#f0ff00] mt-4 font-['Space_Mono'] font-black uppercase tracking-widest">{Math.round(preloadProgress)}% COMPLETE</p>
           </div>
         </div>
       )}
 
-      {/* Section title */}
-      <div className="absolute top-8 left-0 right-0 flex justify-center z-10">
-        <h2 className="text-4xl md:text-5xl font-['Space_Grotesk'] font-bold gradient-text">
-          Projects
+      {/* Section title - Busted style */}
+      <div className="absolute top-12 left-0 right-0 flex justify-center z-10">
+        <h2 className="text-5xl md:text-8xl font-['Space_Grotesk'] font-black glitch-text uppercase italic tracking-tighter" data-text="PROJECT_TERMINAL">
+          PROJECT_<span className="text-[#f0ff00]">TERMINAL</span>
         </h2>
       </div>
 
       {/* Main split layout */}
-      <div className="absolute inset-0 flex items-center justify-center pt-16 z-10">
-        {/* LEFT — Circle frame display */}
+      <div className="absolute inset-0 flex items-center justify-center pt-24 z-10">
+        {/* LEFT — Circular frame display */}
         <div className="w-1/2 flex items-center justify-center relative">
-          {/* Outer glowing ring */}
+          
+          {/* Outer glowing rings */}
           <div
             className="absolute rounded-full"
             style={{
               width: 'min(45vw, 460px)',
               height: 'min(45vw, 460px)',
-              background: `conic-gradient(from 0deg, #00d9ff, #7b2cbf, #ff2a6d, #00d9ff)`,
-              filter: 'blur(2px)',
-              opacity: 0.35,
-              animation: 'spin 8s linear infinite'
+              background: `conic-gradient(from 0deg, #f0ff00, #ff6b00, #ff2a6d, #f0ff00)`,
+              filter: 'blur(10px)',
+              opacity: 0.3,
+              animation: 'spin 12s linear infinite'
             }}
           />
-          {/* Inner ring border */}
-          <div
-            className="absolute rounded-full border-2 border-white/10"
-            style={{
-              width: 'min(43vw, 450px)',
-              height: 'min(43vw, 450px)',
-            }}
-          />
+          
           {/* Canvas clipped to circle */}
           <div
-            className="relative overflow-hidden rounded-full shadow-2xl"
+            className="relative overflow-hidden rounded-full border-8 border-white/10"
             style={{
               width: 'min(40vw, 420px)',
               height: 'min(40vw, 420px)',
-              boxShadow: `0 0 60px 10px ${project.color}55`
+              boxShadow: `0 0 100px -10px ${project.color}66`
             }}
           >
             <canvas
               ref={canvasRef}
+              className="w-full h-full block object-cover"
               style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                display: 'block',
-                transition: 'box-shadow 0.5s ease'
+                filter: 'contrast(1.1) brightness(1.1)'
               }}
             />
-            {/* Overlay tint matching active project */}
-            <div
-              className="absolute inset-0"
-              style={{
-                background: `radial-gradient(circle at center, transparent 40%, ${project.color}22 100%)`,
-                transition: 'background 0.5s ease'
-              }}
-            />
+            {/* Scanlines on canvas */}
+            <div className="absolute inset-0 pointer-events-none opacity-30 circle-scanlines" />
+            <div className="absolute inset-0 bg-current opacity-5 pointer-events-none transition-colors duration-500" style={{ color: project.color }} />
           </div>
 
-          {/* Orbit dots — 6 project indicators */}
+          {/* Orbit indicators — Sliding window indicators */}
           {projects.map((p, i) => {
             const angle = (i / projects.length) * 2 * Math.PI - Math.PI / 2
-            const radius = 'min(23vw, 240px)'
-            // Use inline style with calc
-            const size = 230 // half of 460px approx
-            const x = Math.cos(angle) * size
-            const y = Math.sin(angle) * size
+            // Distance from center
+            const orbitDist = Math.min(window.innerWidth * 0.23, 240)
+            const x = Math.cos(angle) * orbitDist
+            const y = Math.sin(angle) * orbitDist
+            const isActive = i === activeIndex
+
             return (
               <button
                 key={p.id}
                 onClick={() => goTo(i)}
-                title={p.title}
                 style={{
                   position: 'absolute',
                   left: `calc(50% + ${x}px)`,
                   top: `calc(50% + ${y}px)`,
                   transform: 'translate(-50%, -50%)',
-                  width: i === activeIndex ? '44px' : '32px',
-                  height: i === activeIndex ? '44px' : '32px',
+                  width: isActive ? '64px' : '44px',
+                  height: isActive ? '64px' : '44px',
                   borderRadius: '50%',
-                  background: i === activeIndex ? p.color : 'rgba(255,255,255,0.08)',
-                  border: `2px solid ${p.color}`,
-                  boxShadow: i === activeIndex ? `0 0 18px 4px ${p.color}88` : 'none',
+                  background: isActive ? p.color : 'rgba(255,255,255,0.05)',
+                  border: `3px solid ${isActive ? '#fff' : p.color + '44'}`,
+                  boxShadow: isActive ? `0 0 40px ${p.color}` : 'none',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: i === activeIndex ? '18px' : '14px',
+                  fontSize: isActive ? '28px' : '20px',
                   cursor: 'pointer',
-                  transition: 'all 0.4s cubic-bezier(0.34,1.56,0.64,1)',
-                  zIndex: 5
+                  transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  zIndex: 30
                 }}
               >
-                {p.icon}
+                <span className={isActive ? 'animate-pulse' : ''}>{p.icon}</span>
               </button>
             )
           })}
         </div>
 
-        {/* RIGHT — Sliding project card */}
+        {/* RIGHT — Busted project card */}
         <div
           className="w-1/2 flex items-center justify-center"
           onMouseEnter={() => { isHovering.current = true }}
           onMouseLeave={() => { isHovering.current = false }}
         >
-          <div className="relative w-full max-w-[480px] px-6">
+          <div className="relative w-full max-w-[520px] px-8">
             {/* Card */}
             <div
               key={project.id}
-              className={`glass-card rounded-3xl overflow-hidden border-2 ${project.borderColor} ${project.glowClass}`}
-              style={{
-                animation: 'slideInRight 0.45s cubic-bezier(0.34,1.56,0.64,1)'
-              }}
+              className="bg-white/5 border-l-8 p-10 skew-x-[-4deg] relative overflow-hidden group"
+              style={{ borderColor: project.color }}
             >
-              {/* Icon banner */}
-              <div
-                className="h-36 relative flex items-center justify-center"
-                style={{ background: `linear-gradient(135deg, ${project.color}22 0%, transparent 100%)` }}
-              >
-                <span style={{ fontSize: '72px', filter: `drop-shadow(0 0 24px ${project.color})` }}>
-                  {project.icon}
-                </span>
-                <div className="absolute top-4 right-4 flex gap-2">
+               {/* Decorative background ID */}
+               <div className="absolute -right-8 -top-8 text-[12rem] font-black text-white/[0.03] pointer-events-none select-none italic">
+                {project.id}
+              </div>
+
+              {/* Top Meta */}
+              <div className="flex justify-between items-start mb-8 skew-x-[4deg]">
+                <div>
+                   <p className="text-[10px] font-['Space_Mono'] font-black uppercase tracking-[0.4em] opacity-40 mb-2">PROJECT_STATUS: ACTIVE</p>
+                   <h4 className="text-4xl md:text-5xl font-['Space_Grotesk'] font-black italic tracking-tighter uppercase" style={{ color: project.color }}>
+                    {project.title}
+                  </h4>
+                  <p className="text-white/40 text-xs font-black font-['Space_Mono'] mt-1 uppercase tracking-widest">{project.subtitle}</p>
+                </div>
+                
+                <div className="flex gap-4">
                   {project.liveUrl && (
                     <a
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 rounded-full glass border border-white/10 hover:border-white/30 transition-all"
-                      style={{ color: project.color }}
+                      className="p-3 bg-white/10 hover:bg-[#f0ff00] text-white hover:text-black transition-colors skew-x-[-12deg]"
                     >
-                      <FiExternalLink size={16} />
+                      <FiExternalLink size={20} className="skew-x-[12deg]" />
                     </a>
                   )}
                   {project.githubUrl && (
@@ -372,58 +373,56 @@ export default function Projects() {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 rounded-full glass border border-white/10 hover:border-white/30 transition-all text-gray-300"
+                      className="p-3 bg-white/10 hover:bg-[#f0ff00] text-white hover:text-black transition-colors skew-x-[-12deg]"
                     >
-                      <FiGithub size={16} />
+                      <FiGithub size={20} className="skew-x-[12deg]" />
                     </a>
                   )}
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="p-6 md:p-8">
-                <h4 className="text-2xl md:text-3xl font-['Space_Grotesk'] font-bold mb-1" style={{ color: project.color }}>
-                  {project.title}
-                </h4>
-                <p className="text-gray-400 text-sm mb-4">{project.subtitle}</p>
-                <p className="text-gray-300 mb-5 leading-relaxed text-sm md:text-base">
+              {/* Description */}
+              <div className="skew-x-[4deg] mb-8">
+                <p className="text-white/80 font-black font-['Space_Mono'] leading-tight italic uppercase text-lg">
                   {project.description}
                 </p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.stack.map(tech => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 text-xs rounded-full glass"
-                      style={{ color: project.color, border: `1px solid ${project.color}44` }}
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
               </div>
+
+              {/* Stack */}
+              <div className="flex flex-wrap gap-3 skew-x-[4deg]">
+                {project.stack.map(tech => (
+                  <span
+                    key={tech}
+                    className="px-4 py-1 text-[10px] font-black font-['Space_Mono'] border-2 uppercase tracking-tighter"
+                    style={{ color: project.color, borderColor: `${project.color}33` }}
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              
+              {/* Hover highlight overlay */}
+              <div className="absolute inset-0 bg-[#f0ff00]/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
             </div>
 
-            {/* Navigation row */}
-            <div className="flex items-center justify-between mt-5 px-1">
+            {/* Navigation row - Skewed buttons */}
+            <div className="flex items-center justify-between mt-8 px-1">
               <button
                 onClick={prev}
-                className="p-3 rounded-full glass border border-white/10 hover:border-white/30 text-gray-300 hover:text-white transition-all"
+                className="p-4 bg-white/5 border-2 border-white/10 hover:bg-white hover:text-black transition-all skew-x-[-12deg]"
               >
-                <FiChevronLeft size={20} />
+                <FiChevronLeft size={24} className="skew-x-[12deg]" />
               </button>
 
-              {/* Dot indicators */}
-              <div className="flex gap-2">
+              {/* Custom indicators */}
+              <div className="flex gap-3">
                 {projects.map((_, i) => (
-                  <button
+                  <div
                     key={i}
-                    onClick={() => goTo(i)}
-                    className="rounded-full transition-all duration-300"
+                    className="w-12 h-2 skew-x-[-20deg] transition-all duration-300"
                     style={{
-                      width: i === activeIndex ? '24px' : '8px',
-                      height: '8px',
-                      background: i === activeIndex ? project.color : 'rgba(255,255,255,0.2)',
-                      boxShadow: i === activeIndex ? `0 0 8px 2px ${project.color}88` : 'none'
+                      backgroundColor: i === activeIndex ? project.color : 'rgba(255,255,255,0.1)',
+                      boxShadow: i === activeIndex ? `0 0 15px ${project.color}` : 'none'
                     }}
                   />
                 ))}
@@ -431,21 +430,15 @@ export default function Projects() {
 
               <button
                 onClick={next}
-                className="p-3 rounded-full glass border border-white/10 hover:border-white/30 text-gray-300 hover:text-white transition-all"
+                className="p-4 bg-white/5 border-2 border-white/10 hover:bg-white hover:text-black transition-all skew-x-[-12deg]"
               >
-                <FiChevronRight size={20} />
+                <FiChevronRight size={24} className="skew-x-[12deg]" />
               </button>
             </div>
-
-            {/* Project counter */}
-            <p className="text-center text-gray-500 text-xs mt-3">
-              {activeIndex + 1} / {projects.length}
-            </p>
           </div>
         </div>
       </div>
 
-      {/* Keyframe styles */}
       <style>{`
         @keyframes spin {
           from { transform: rotate(0deg); }

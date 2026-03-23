@@ -18,11 +18,14 @@ import Education from './sections/Education'
 import Contact from './sections/Contact'
 import Footer from './sections/Footer'
 
+import { useIsMobile } from './hooks/use-mobile'
+
 gsap.registerPlugin(ScrollTrigger)
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
   const mainRef = useRef<HTMLDivElement>(null)
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     // Simulate loading
@@ -40,9 +43,6 @@ function App() {
     }
   }, [isLoading])
 
-  // Check if mobile
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
-
   return (
     <AnimatePresence mode="wait">
       {isLoading ? (
@@ -56,31 +56,32 @@ function App() {
           <div className="relative">
             <motion.div
               animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.5, 1, 0.5]
+                scale: [1, 1.5, 0.8, 1.2, 1],
+                opacity: [0.5, 1, 0.2, 1, 0.5],
+                skewX: [0, 20, -20, 0]
               }}
               transition={{
-                duration: 1.5,
+                duration: 0.5,
                 repeat: Infinity,
-                ease: "easeInOut"
+                ease: "linear"
               }}
-              className="text-6xl font-bold gradient-text font-['Space_Grotesk']"
+              className="text-6xl font-black text-[#f0ff00] font-['Space_Grotesk'] italic tracking-tighter"
+              style={{ textShadow: '0 0 20px #f0ff00' }}
             >
-              RG
+              RG_OS_v0.5
             </motion.div>
             <motion.div
-              className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-cyan-400 to-pink-500 rounded-full"
+              className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-48 h-2 bg-[#f0ff00]"
               initial={{ scaleX: 0 }}
-              animate={{ scaleX: [0, 1, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
+              animate={{ scaleX: [0, 1, 0.5, 1, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
             />
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="absolute -bottom-16 left-1/2 -translate-x-1/2 text-gray-500 text-sm whitespace-nowrap"
+              className="absolute -bottom-16 left-1/2 -translate-x-1/2 text-[#f0ff00] text-[10px] font-['Space_Mono'] whitespace-nowrap uppercase font-black"
             >
-              Initializing 3D Environment...
+              BREACHING PROTOCOLS... [OK]
             </motion.p>
           </div>
         </motion.div>
@@ -89,21 +90,24 @@ function App() {
           key="app"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.4 }}
           className="relative nvg8-body-bg min-h-screen"
         >
-          {/* Noise Overlay */}
-          <div className="noise-overlay" />
+          {/* Global Busted Overlay */}
+          <div className="fixed inset-0 z-[10000] pointer-events-none opacity-[0.03] noise-overlay" />
+          <div className="fixed inset-0 z-[9999] pointer-events-none opacity-[0.05] circle-scanlines" />
+          <div className="fixed inset-0 z-[9998] pointer-events-none animate-flicker bg-[#f0ff00]/[0.01]" />
 
           {/* NVG8-style Grid + scanning lines */}
-          <div className="nvg8-grid" />
+          <div className="nvg8-grid opacity-10" />
           <div className="nvg8-sentry-lines">
             {Array.from({ length: 12 }).map((_, i) => (
               <span
                 key={i}
                 style={{
                   top: `${(i + 1) * 8}vh`,
-                  animationDelay: `${i * 0.65}s`
+                  animationDelay: `${i * 0.65}s`,
+                  background: 'linear-gradient(90deg, #f0ff00, #ff6b00)'
                 }}
               />
             ))}
@@ -153,6 +157,20 @@ function App() {
             {/* Footer */}
             <Footer />
           </main>
+          
+          <style>{`
+            @keyframes flicker {
+              0% { opacity: 0.1; }
+              5% { opacity: 0.2; }
+              10% { opacity: 0.1; }
+              15% { opacity: 0.3; }
+              20% { opacity: 0.1; }
+              100% { opacity: 0.1; }
+            }
+            .animate-flicker {
+              animation: flicker 0.1s infinite;
+            }
+          `}</style>
         </motion.div>
       )}
     </AnimatePresence>

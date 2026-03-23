@@ -34,7 +34,7 @@ function Typewriter({ texts }: { texts: string[] }) {
   }, [displayText, isDeleting, currentIndex, texts])
 
   return (
-    <span className="typewriter" style={{ color: '#00d9ff' }}>
+    <span className="typewriter" style={{ color: '#f0ff00', textShadow: '0 0 10px #f0ff0066' }}>
       {displayText}
     </span>
   )
@@ -97,35 +97,38 @@ export default function Hero() {
   const scrollToProjects = () => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
   const scrollToContact = () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
 
-  // Particles data
-  const particles = Array.from({ length: 18 }, (_, i) => ({
+  // Particles data - more aggressive colors
+  const particles = Array.from({ length: 24 }, (_, i) => ({
     left: `${Math.random() * 100}%`,
     bottom: `${Math.random() * 20}%`,
-    animationDuration: `${6 + Math.random() * 10}s`,
-    animationDelay: `${Math.random() * 8}s`,
-    opacity: Math.random() * 0.6 + 0.3,
-    width: `${2 + Math.random() * 4}px`,
-    height: `${2 + Math.random() * 4}px`,
-    background: i % 3 === 0 ? '#ff2a6d' : i % 3 === 1 ? '#7b2cbf' : '#00d9ff',
+    animationDuration: `${2 + Math.random() * 4}s`, // Faster
+    animationDelay: `${Math.random() * 2}s`,
+    opacity: Math.random() * 0.8 + 0.2,
+    width: `${2 + Math.random() * 6}px`,
+    height: `${2 + Math.random() * 6}px`,
+    background: i % 3 === 0 ? '#ff6b00' : i % 3 === 1 ? '#f0ff00' : '#ff2a6d',
     boxShadow: i % 3 === 0
-      ? '0 0 8px #ff2a6d'
+      ? '0 0 12px #ff6b00'
       : i % 3 === 1
-      ? '0 0 8px #7b2cbf'
-      : '0 0 8px #00d9ff',
+      ? '0 0 12px #f0ff00'
+      : '0 0 12px #ff2a6d',
   }))
 
   return (
     <section
       id="hero"
       ref={sectionRef}
-      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-[#050810]"
     >
+      {/* Busted Overlay */}
+      <div className="absolute inset-0 pointer-events-none z-20 opacity-20 circle-scanlines" />
+
       {/* Aurora radial background */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 70% 50% at 50% 0%, rgba(0,217,255,0.13) 0%, transparent 60%)'
+            'radial-gradient(ellipse 70% 50% at 50% 50%, rgba(255,107,0,0.1) 0%, transparent 70%)'
         }}
       />
 
@@ -146,60 +149,47 @@ export default function Hero() {
             animationDuration: p.animationDuration,
             animationDelay: p.animationDelay,
             animationIterationCount: 'infinite',
-            animationTimingFunction: 'linear',
+            animationTimingFunction: 'ease-out',
           }}
         />
       ))}
-
-      {/* Horizontal accent lines */}
-      <div
-        className="absolute left-0 right-0 pointer-events-none"
-        style={{ top: '30%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(0,217,255,0.08), transparent)' }}
-      />
-      <div
-        className="absolute left-0 right-0 pointer-events-none"
-        style={{ top: '70%', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(255,42,109,0.06), transparent)' }}
-      />
 
       <div
         ref={contentRef}
         className="w-full px-6 lg:px-12 py-24 flex flex-col lg:flex-row items-center justify-between gap-12 max-w-7xl mx-auto"
       >
         {/* Left Content */}
-        <div className="flex-1 flex flex-col items-start gap-8 z-10">
-          {/* Open to Work Badge */}
+        <div className="flex-1 flex flex-col items-start gap-8 z-30">
+          {/* Busted Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ delay: 0.2, type: 'spring' }}
-            className="parallax-element shimmer flex items-center gap-3 px-5 py-2.5 rounded-full glass"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="parallax-element flex items-center gap-3 px-6 py-2 bg-[#f0ff00] skew-x-[-12deg]"
           >
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
-            </span>
-            <span className="text-sm font-medium text-green-400 font-['Space_Mono']">Available for opportunities</span>
+            <span className="text-sm font-black text-black font-['Space_Mono'] uppercase italic">System: Overloaded</span>
           </motion.div>
 
-          {/* Name with letter glow */}
+          {/* Name with glitch */}
           <div className="parallax-element">
             <motion.h1
-              className="font-['Space_Grotesk'] font-extrabold leading-[0.85] tracking-tight"
+              className="font-['Space_Grotesk'] font-extrabold leading-[0.85] tracking-tighter glitch-text"
+              data-text="RITIK"
               style={{ fontSize: 'clamp(3.5rem, 14vw, 10rem)' }}
-              initial={{ opacity: 0, y: 80 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+              initial={{ opacity: 0, scale: 1.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, type: 'spring', damping: 10 }}
             >
-              <span className="gradient-text" style={{ textShadow: '0 0 80px rgba(0,217,255,0.25)' }}>RITIK</span>
+              <span className="text-[#f0ff00]">RITIK</span>
             </motion.h1>
             <motion.h1
-              className="font-['Space_Grotesk'] font-extrabold leading-[0.85] tracking-tight"
+              className="font-['Space_Grotesk'] font-extrabold leading-[0.85] tracking-tighter glitch-text"
+              data-text="GUSAIN"
               style={{ fontSize: 'clamp(3.5rem, 14vw, 10rem)' }}
-              initial={{ opacity: 0, y: 80 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+              initial={{ opacity: 0, scale: 1.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.1, type: 'spring', damping: 10 }}
             >
-              <span className="gradient-text" style={{ textShadow: '0 0 80px rgba(255,42,109,0.2)' }}>GUSAIN</span>
+              <span className="text-white">GUSAIN</span>
             </motion.h1>
           </div>
 
@@ -208,16 +198,17 @@ export default function Hero() {
             className="parallax-element h-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
+            transition={{ delay: 0.5 }}
           >
-            <p className="text-xl md:text-2xl lg:text-3xl font-medium font-['Space_Mono']">
+            <p className="text-xl md:text-2xl lg:text-3xl font-black font-['Space_Mono'] italic">
               <Typewriter
                 texts={[
-                  'Blockchain Developer',
-                  'AI Engineer',
-                  'Smart Contract Security',
-                  'IoT Hacker',
-                  'Open Source Builder'
+                  'VIBE CODER',
+                  'ENGINEERING CHAOS',
+                  'BREAKING PROTOCOLS',
+                  'QUANTUM EXPLOSION',
+                  'WEB3 DISRUPTOR',
+                  'AI ARCHITECT'
                 ]}
               />
             </p>
@@ -225,27 +216,28 @@ export default function Hero() {
 
           {/* Stats — neon cards */}
           <motion.div
-            className="parallax-element grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5"
+            className="parallax-element grid grid-cols-2 md:grid-cols-4 gap-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9 }}
+            transition={{ delay: 0.7 }}
           >
             {[
-              { value: <AnimatedCounter target={323} />, label: 'LeetCode', color: '#00d9ff' },
-              { value: <AnimatedCounter target={39} />, label: 'Hard', color: '#ff2a6d' },
-              { value: <><AnimatedCounter target={100} />+</>, label: 'Trades', color: '#7b2cbf' },
-              { value: '8.49', label: 'CGPA', color: '#00d9ff' },
+              { value: <AnimatedCounter target={323} />, label: 'LeetCode', color: '#f0ff00' },
+              { value: <AnimatedCounter target={39} />, label: 'Hard', color: '#ff6b00' },
+              { value: <><AnimatedCounter target={100} />+</>, label: 'Trades', color: '#ff2a6d' },
+              { value: '8.49', label: 'CGPA', color: '#f0ff00' },
             ].map((s, i) => (
               <motion.div
                 key={i}
-                whileHover={{ scale: 1.05, y: -4 }}
-                className="glass rounded-2xl p-4 text-center neon-border"
-                style={{ borderLeft: `2px solid ${s.color}44` }}
+                whileHover={{ scale: 1.1, rotate: i % 2 === 0 ? 2 : -2 }}
+                className="bg-white/5 border-2 border-white/10 p-4 relative overflow-hidden group"
               >
-                <p className="text-2xl md:text-3xl font-['Space_Grotesk'] font-extrabold" style={{ color: s.color }}>
+                <div className="absolute top-0 left-0 w-1 h-full bg-current" style={{ color: s.color }} />
+                <p className="text-2xl md:text-3xl font-['Space_Grotesk'] font-black" style={{ color: s.color }}>
                   {s.value}
                 </p>
-                <p className="text-xs text-gray-500 mt-1 font-['Space_Mono'] uppercase tracking-widest">{s.label}</p>
+                <p className="text-[10px] text-white/40 mt-1 font-['Space_Mono'] uppercase tracking-[0.2em]">{s.label}</p>
+                <div className="absolute -right-4 -bottom-4 w-12 h-12 bg-current opacity-0 group-hover:opacity-10 transition-opacity rotate-45" style={{ color: s.color }} />
               </motion.div>
             ))}
           </motion.div>
@@ -253,55 +245,37 @@ export default function Hero() {
           {/* CTAs */}
           <motion.div
             className="parallax-element flex flex-wrap gap-4"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1 }}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.9 }}
           >
             <motion.button
               onClick={scrollToProjects}
-              className="btn-primary flex items-center gap-2 hoverable"
-              whileHover={{ scale: 1.05, boxShadow: '0 0 50px rgba(0, 217, 255, 0.6)' }}
-              whileTap={{ scale: 0.95 }}
-            >
-              View Projects
-              <span style={{ fontSize: '1.1em' }}>→</span>
-            </motion.button>
-            <motion.button
-              onClick={scrollToContact}
-              className="btn-outline hoverable"
+              className="px-8 py-4 bg-[#f0ff00] text-black font-black uppercase tracking-widest hover:bg-white transition-colors skew-x-[-12deg] relative group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Get in Touch
+              <span className="skew-x-[12deg] inline-block">Ignite Projects</span>
+              <div className="absolute inset-0 border-2 border-[#f0ff00] translate-x-2 translate-y-2 -z-10 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform" />
             </motion.button>
-          </motion.div>
-
-          {/* Tech strip */}
-          <motion.div
-            className="parallax-element flex gap-4 flex-wrap"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.3 }}
-          >
-            {['Solidity', 'React', 'Python', 'Web3', 'GSAP', 'ESP32'].map((t) => (
-              <span
-                key={t}
-                className="text-xs font-['Space_Mono'] text-gray-500 uppercase tracking-widest px-3 py-1 rounded-full"
-                style={{ border: '1px solid rgba(255,255,255,0.06)' }}
-              >
-                {t}
-              </span>
-            ))}
+            <motion.button
+              onClick={scrollToContact}
+              className="px-8 py-4 border-2 border-white text-white font-black uppercase tracking-widest hover:bg-white hover:text-black transition-colors skew-x-[-12deg]"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span className="skew-x-[12deg] inline-block">Join the Blast</span>
+            </motion.button>
           </motion.div>
         </div>
 
-        {/* Right Content — Quantum Node */}
+        {/* Right Content — Explosion Node */}
         <motion.div
-          className="flex-1 flex items-center justify-center parallax-element"
+          className="flex-1 flex items-center justify-center parallax-element z-10"
           style={{ minHeight: '440px', height: '55vw', maxHeight: '680px' }}
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.4, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+          initial={{ opacity: 0, scale: 0.5, rotate: -45 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          transition={{ duration: 0.8, delay: 0.4, type: 'spring' }}
         >
           <QuantumHero />
         </motion.div>
@@ -314,14 +288,14 @@ export default function Hero() {
         transition={{ delay: 1.5 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="text-xs text-gray-600 uppercase tracking-widest font-['Space_Mono']">Scroll</span>
+        <span className="text-xs text-white/40 uppercase tracking-widest font-['Space_Mono']">Scroll</span>
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-6 h-10 rounded-full border border-gray-700 flex items-start justify-center p-2"
+          className="w-6 h-10 border-2 border-white/20 flex items-start justify-center p-2 skew-x-[-12deg]"
         >
           <motion.div
-            className="w-1 h-2 bg-cyan-400 rounded-full"
+            className="w-1 h-2 bg-[#f0ff00] shadow-[0_0_10px_#f0ff00]"
             animate={{ opacity: [1, 0.3, 1] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           />
@@ -330,8 +304,8 @@ export default function Hero() {
 
       <style>{`
         @keyframes float-up {
-          0%   { transform: translateY(0) scale(1); opacity: 0.7; }
-          100% { transform: translateY(-100vh) scale(0.4); opacity: 0; }
+          0%   { transform: translateY(0) scale(1) rotate(0deg); opacity: 0.8; }
+          100% { transform: translateY(-100vh) scale(0) rotate(360deg); opacity: 0; }
         }
       `}</style>
     </section>
