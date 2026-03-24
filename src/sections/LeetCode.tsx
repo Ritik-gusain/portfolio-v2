@@ -191,7 +191,7 @@ export default function LeetCode() {
                       </div>
                    </div>
 
-                   {/* Core */
+                   {/* Core */}
                    <div className="space-y-6">
                       <p className="text-[10px] font-black font-['Space_Mono'] text-white/40 tracking-[0.5em] uppercase">// CORE_PROTOCOLS</p>
                       <div className="grid gap-6">
